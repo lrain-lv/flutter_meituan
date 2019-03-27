@@ -15,9 +15,4 @@
     event_bus: ^1.0.3  
     url_launcher: ^3.0.3  
 
-![](https://github.com/lrain-lv/flutter_meituan/blob/master/WechatIMG6.jpeg)
-![](https://github.com/lrain-lv/flutter_meituan/blob/master/WechatIMG5.jpeg)
-![](https://github.com/lrain-lv/flutter_meituan/blob/master/WechatIMG2.jpeg)
-![](https://github.com/lrain-lv/flutter_meituan/blob/master/WechatIMG3.jpeg)
-
 
