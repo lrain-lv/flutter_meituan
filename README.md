@@ -1,6 +1,6 @@
 
 [点击下载APK体验](https://github.com/lrain-lv/flutter_meituan/blob/master/app.apk)
-
+ ![image]( https://github.com/lrain-lv/flutter_meituan/blob/master/1553675683480.gif)
 **使用的三方库：**  
     cupertino_icons: ^0.1.2  
     fluttertoast: ^2.1.1  
