@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gank/entity/nearby_recommend_entity.dart';
+import 'package:flutter_gank/entity/recommend_entity.dart';
+import 'package:flutter_gank/home/page_food_detail.dart';
 import 'package:flutter_gank/http/gank_api_service.dart';
 import 'package:flutter_gank/nearby/page_nearby_header_view.dart';
 import 'package:flutter_gank/common.dart';
@@ -27,7 +29,7 @@ class NearbyListState extends State<NearbyListWidget>
 
   String cate;
 
-  List<DataNearby> datas;
+  List<Data2> datas;
 
   @override
   void initState() {
@@ -56,9 +58,9 @@ class NearbyListState extends State<NearbyListWidget>
       var response = await GankApiService.getNearbyRecommentData(cate);
       String jsonSoc = json.encode(response);
       Map<String, dynamic> map = await json.decode(jsonSoc);
-      NearbyRecommendEntity entity = NearbyRecommendEntity.fromJson(map);
+      RecommendEntity entity = RecommendEntity.fromJson(map);
       setState(() {
-        datas = entity.getData();
+        datas = entity.getData2();
       });
       print(datas.length.toString() + jsonSoc);
     } catch (e) {
@@ -181,11 +183,11 @@ class NearbyListState extends State<NearbyListWidget>
   }
 
   Widget buildItem(context, index) {
-    DataNearby data = datas[index];
-    if ((data.getPayAbstracts()).length >= 3) {
-      data.getPayAbstracts().removeRange(2, (data.getPayAbstracts()).length);
+    Data2 data = datas[index];
+    if ((data.payAbstracts).length >= 3) {
+      data.payAbstracts.removeRange(2, (data.payAbstracts).length);
     }
-    List<PayAbstracts> abstracts = (data.getPayAbstracts());
+    List<PayAbstracts> abstracts = data.payAbstracts;
     String imgUrl = data.frontImg.replaceAll(new RegExp(r"w.h"), "160.0");
     return GestureDetector(
       child: Container(
@@ -312,7 +314,12 @@ class NearbyListState extends State<NearbyListWidget>
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute<void>(builder: (BuildContext context) {
+          return new FoodDetailWidget(data);
+        }));
+      },
     );
   }
 

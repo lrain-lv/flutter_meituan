@@ -44,7 +44,6 @@ class WelfareState extends State<WelfareStateWidget> {
     String jsonSrc = json.encode(response);
     Map<String, dynamic> map = json.decode(jsonSrc);
     GankItemEntity gankItemEntity = new GankItemEntity.fromJson(map);
-    print(jsonSrc);
     _refreshController.sendBack(true, RefreshStatus.completed);
     setState(() {
       entities.clear();
@@ -58,7 +57,6 @@ class WelfareState extends State<WelfareStateWidget> {
     String jsonSrc = json.encode(response);
     Map<String, dynamic> map = json.decode(jsonSrc);
     GankItemEntity gankItemEntity = new GankItemEntity.fromJson(map);
-    print(jsonSrc);
     _refreshController.sendBack(false, RefreshStatus.idle);
     setState(() {
       entities.addAll(gankItemEntity.getResults());

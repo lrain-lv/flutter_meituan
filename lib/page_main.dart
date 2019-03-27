@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gank/categories/page_categories.dart';
+import 'package:flutter_gank/mine/page_mine.dart';
 import 'package:flutter_gank/welfare/page_welfare.dart';
 import 'package:flutter_gank/home/page_home.dart';
 import 'package:flutter_gank/nearby/page_near_by.dart';
@@ -15,7 +18,7 @@ class MainStateWidget extends StatefulWidget {
 
 class MainState extends State<MainStateWidget>
     with AutomaticKeepAliveClientMixin<MainStateWidget> {
-  final _navigationBottomBarChoosedColor = Colors.blueAccent;
+  final _navigationBottomBarChoosedColor = Color.fromARGB(250, 6, 193, 174);
   final _navigationBottomBarUnChoosedColor = Colors.grey;
 
   int _currentIndex = 0;
@@ -32,7 +35,8 @@ class MainState extends State<MainStateWidget>
       ..add(new HomeStateWidget())
       ..add(new NearbyWidget())
       ..add(new CategoryStateWidget())
-      ..add(new WelfareStateWidget());
+      ..add(new WelfareStateWidget())
+      ..add(new MineWidget());
   }
 
   @override
@@ -51,6 +55,7 @@ class MainState extends State<MainStateWidget>
               NearbyWidget(),
               CategoryStateWidget(),
               WelfareStateWidget(),
+              MineWidget(),
             ],
             index: _currentIndex,
           ),
@@ -112,9 +117,24 @@ class MainState extends State<MainStateWidget>
                             ? _navigationBottomBarChoosedColor
                             : _navigationBottomBarUnChoosedColor),
                   )),
+              new BottomNavigationBarItem(
+                  icon: new Icon(
+                    Icons.people,
+                    color: _currentIndex == 4
+                        ? _navigationBottomBarChoosedColor
+                        : _navigationBottomBarUnChoosedColor,
+                  ),
+                  title: new Text(
+                    "我的",
+                    style: new TextStyle(
+                        color: _currentIndex == 4
+                            ? _navigationBottomBarChoosedColor
+                            : _navigationBottomBarUnChoosedColor),
+                  ))
             ],
             currentIndex: _currentIndex,
             onTap: _onTap,
+            iconSize: 18,
             type: BottomNavigationBarType.fixed,
           ),
         ),

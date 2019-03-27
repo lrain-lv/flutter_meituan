@@ -27,8 +27,8 @@ class GankApiService {
     String url =
         "http://api.meituan.com/group/v1/poi/select/cate/1?cityId=1&sort=smart&coupon=all&mpt_cate1=20&mpt_cate2=79&offset=" +
             offset +
-            "&limit=40";
-
+            "&limit=15";
+    print(url);
     var result = await HttpManager.instance.getRequest(url);
 
     return result;
@@ -40,6 +40,27 @@ class GankApiService {
         "?cityId=1&sort=smart&coupon=all&mpt_cate1=20&mpt_cate2=79&offset=" +
         offset +
         "&limit=20";
+    print(url);
+    var result = await HttpManager.instance.getRequest(url);
+
+    return result;
+  }
+
+  static getMealDetail(String poiid) async {
+    String url = 'http://api.meituan.com/meishi/poi/v1/poi/deallist/' +
+        poiid +
+        '?poiid=' +
+        poiid +
+        '&ci=1&__vhost=api.meishi.meituan.com';
+    print(url);
+    var result = await HttpManager.instance.getRequest(url);
+
+    return result;
+  }
+
+  static nearByRecomment(String poiid) async {
+    String url =
+        'http://api.meituan.com/group/v1/recommend/nearstoredeals/poi/' + poiid;
     print(url);
     var result = await HttpManager.instance.getRequest(url);
 
