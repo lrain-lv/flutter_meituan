@@ -16,7 +16,6 @@ class CouponWidget extends StatefulWidget {
 class CouponWidgetState extends State<CouponWidget> {
   @override
   Widget build(BuildContext context) {
-    print("CouponWidgetState-----" + widget.meals.length.toString());
     // TODO: implement build
     return Column(
       children: buildItems(widget.meals),

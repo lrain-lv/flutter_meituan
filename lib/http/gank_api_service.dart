@@ -46,6 +46,35 @@ class GankApiService {
     return result;
   }
 
+  static getNewsData(
+      {String title = "%E6%8E%A8%E8%8D%90", int pageNum = 1}) async {
+    String str;
+    switch (title) {
+      case "推荐":
+        str = "%E6%8E%A8%E8%8D%90";
+        break;
+      case "热点":
+        str = "%E7%83%AD%E7%82%B9";
+        break;
+      case "评测":
+        str = "%E8%AF%84%E6%B5%8B";
+        break;
+      case "攻略":
+        str = "%E6%94%BB%E7%95%A5";
+        break;
+    }
+    String url =
+        "http://headline.leishenyouxi.com/rest/data/android/articles?deviceType=Anroid&artLens=20&specifyStr=" +
+            str +
+            "&pageNum=" +
+            pageNum.toString();
+
+    print(url);
+    var result = await HttpManager.instance.getRequest(url);
+
+    return result;
+  }
+
   static getMealDetail(String poiid) async {
     String url = 'http://api.meituan.com/meishi/poi/v1/poi/deallist/' +
         poiid +

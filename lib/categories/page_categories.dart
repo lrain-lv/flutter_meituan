@@ -40,7 +40,6 @@ class CategoryState extends State<CategoryStateWidget>
   void initState() {
     super.initState();
     _tabController = TabController(length: categories.length, vsync: this);
-    print("initState" + "CategoryState");
   }
 
   @override

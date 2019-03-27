@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_gank/categories/page_web_view.dart';
+import 'package:flutter_gank/home/page_web_view.dart';
 import 'package:flutter_gank/common.dart';
 
 // ignore: must_be_immutable
@@ -168,7 +168,6 @@ class HomeMenu extends StatelessWidget {
   Widget buildItem(String image, String title) {
     return GestureDetector(
       onTap: () {
-        print(title);
       },
       child: Column(children: <Widget>[
         Container(

@@ -42,10 +42,8 @@ class NearbyHeaderViewState extends State<NearbyHeaderViewWidget>
   }
 
   List<Widget> buildWidgets(String title, int selectedIndex) {
-    print("buildWidgets" + title + selectedIndex.toString());
     switch (title) {
       case "享美食":
-        print("switch" + title + selectedIndex.toString());
         String selectedName = meishi[selectedIndex];
         return meishi.map((name) {
           try {
@@ -79,7 +77,6 @@ class NearbyHeaderViewState extends State<NearbyHeaderViewWidget>
         }).toList();
         break;
       case "住酒店":
-        print("switch" + title + selectedIndex.toString());
         String selectedName = CommonUtil.hotel[selectedIndex];
         return CommonUtil.hotel.map((name) {
           int index = CommonUtil.hotel.indexOf(name);

@@ -20,7 +20,6 @@ class MineStateWidget extends State<MineWidget> {
   @override
   Widget build(BuildContext context) {
     double barHeight = MediaQuery.of(context).padding.top;
-    print("barHeight------:" + barHeight.toString());
     //    // TODO: implement build
     return Container(
         color: Colors.white,

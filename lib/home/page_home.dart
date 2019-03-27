@@ -58,7 +58,6 @@ class HomeState extends State<HomeStateWidget>
 
   @override
   void dispose() {
-    print("dispose");
     if (streamSubscription != null) {
       streamSubscription.cancel();
     }
@@ -79,7 +78,6 @@ class HomeState extends State<HomeStateWidget>
           isLoading = false;
         }
         datas = recommendEntity.getData2();
-        print(datas.length.toString());
       });
     } catch (e) {}
   }

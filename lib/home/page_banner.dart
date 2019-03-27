@@ -41,7 +41,6 @@ class HomeBannerWidget extends State<HomeBanner>
           ? Container()
           : new Swiper(
               onTap: (index) {
-                print(index);
               },
               containerHeight: widget.bannerHeight,
               autoplay: true,

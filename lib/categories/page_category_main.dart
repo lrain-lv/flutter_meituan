@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
-import 'package:flutter_gank/categories/page_web_view.dart';
+import 'package:flutter_gank/home/page_web_view.dart';
 import 'package:flutter_gank/entity/gank_item_entity.dart';
 import 'package:flutter_gank/http/gank_api_service.dart';
 import 'package:flutter_gank/common.dart';

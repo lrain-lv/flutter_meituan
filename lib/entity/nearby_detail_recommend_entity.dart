@@ -51,9 +51,9 @@ class DataDetail extends Object {
   );
 
   factory DataDetail.fromJson(Map<String, dynamic> srcJson) =>
-      _$DataFromJson(srcJson);
+      _$DataDetailFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$DataDetailToJson(this);
 }
 
 @JsonSerializable()

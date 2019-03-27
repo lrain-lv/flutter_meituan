@@ -33,7 +33,6 @@ class FoodDetailState extends State<FoodDetailWidget> {
     super.initState();
     deals = List();
     dataMeals = List();
-    print("FoodDetailState------>");
     getRequestData();
   }
 
@@ -41,13 +40,11 @@ class FoodDetailState extends State<FoodDetailWidget> {
     try {
       var response1 = await GankApiService.getMealDetail(widget._data2.poiid);
       String json1 = json.encode(response1);
-      print("MealsDetailEntity------" + json1);
       Map<String, dynamic> map1 = await json.decode(json1);
       MealsDetailEntity mealsDetailEntity = MealsDetailEntity.fromJson(map1);
 
       var response2 = await GankApiService.nearByRecomment(widget._data2.poiid);
       String json2 = json.encode(response2);
-      print("NearbyDetailRecommendEntity------" + json1);
       Map<String, dynamic> map2 = await json.decode(json2);
       NearbyDetailRecommendEntity nearbyDetailRecommendEntity =
           NearbyDetailRecommendEntity.fromJson(map2);

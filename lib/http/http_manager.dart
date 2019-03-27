@@ -35,7 +35,6 @@ class HttpManager {
           await dio.request(url, options: new Options(method: "GET"));
       return response.data;
     } on DioError catch (e) {
-      print("请求出错========>" + e.toString());
     }
 
     return new Map();

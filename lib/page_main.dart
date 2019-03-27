@@ -7,6 +7,7 @@ import 'package:flutter_gank/mine/page_mine.dart';
 import 'package:flutter_gank/welfare/page_welfare.dart';
 import 'package:flutter_gank/home/page_home.dart';
 import 'package:flutter_gank/nearby/page_near_by.dart';
+import 'package:flutter_gank/news/page_news_home.dart';
 
 class MainStateWidget extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class MainState extends State<MainStateWidget>
     pages
       ..add(new HomeStateWidget())
       ..add(new NearbyWidget())
-      ..add(new CategoryStateWidget())
+      ..add(new NewsMainWidget())
       ..add(new WelfareStateWidget())
       ..add(new MineWidget());
   }
@@ -53,7 +54,7 @@ class MainState extends State<MainStateWidget>
             children: <Widget>[
               HomeStateWidget(),
               NearbyWidget(),
-              CategoryStateWidget(),
+              NewsMainWidget(),
               WelfareStateWidget(),
               MineWidget(),
             ],
@@ -97,7 +98,7 @@ class MainState extends State<MainStateWidget>
                         : _navigationBottomBarUnChoosedColor,
                   ),
                   title: new Text(
-                    "分类",
+                    "新闻",
                     style: new TextStyle(
                         color: _currentIndex == 2
                             ? _navigationBottomBarChoosedColor

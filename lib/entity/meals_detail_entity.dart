@@ -163,9 +163,9 @@ class DataMeal extends Object {
   );
 
   factory DataMeal.fromJson(Map<String, dynamic> srcJson) =>
-      _$DataFromJson(srcJson);
+      _$DataMealFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$DataMealToJson(this);
 }
 
 @JsonSerializable()

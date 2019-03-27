@@ -62,7 +62,6 @@ class NearbyListState extends State<NearbyListWidget>
       setState(() {
         datas = entity.getData2();
       });
-      print(datas.length.toString() + jsonSoc);
     } catch (e) {
       print(e);
       setState(() {

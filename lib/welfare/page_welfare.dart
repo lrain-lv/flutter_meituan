@@ -31,7 +31,6 @@ class WelfareState extends State<WelfareStateWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("initState" + "WelfareState");
     _refreshController = new RefreshController();
     getRequest();
   }
