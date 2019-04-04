@@ -7,6 +7,8 @@ class BannerEntity extends Object {
   @JsonKey(name: 'data')
   List<Data> data;
 
+  List<Data> get d => data;
+
   BannerEntity(
     this.data,
   );

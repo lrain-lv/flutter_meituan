@@ -129,5 +129,14 @@ class Articles extends Object {
   factory Articles.fromJson(Map<String, dynamic> srcJson) =>
       _$ArticlesFromJson(srcJson);
 
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'articleId': articleId,
+        'articleTitle': articleTitle,
+        'coverBigUrl': coverBigUrl,
+        'authorPortraitUrl': authorPortraitUrl,
+        'authorName': authorName,
+        'articleRead': articleRead
+      };
+
   Map<String, dynamic> toJson() => _$ArticlesToJson(this);
 }

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gank/home/page_food_detail.dart';
+import 'package:flutter_gank/home/page_web_view.dart';
 import 'package:flutter_gank/page_guide.dart';
 import 'package:flutter_gank/page_splash.dart';
 import 'package:flutter_gank/page_main.dart';

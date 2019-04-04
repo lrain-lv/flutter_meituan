@@ -118,13 +118,18 @@ class HomeState extends State<HomeStateWidget>
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
-            leading: Container(
-              padding: EdgeInsets.all(8),
-              child: CircleAvatar(
-                backgroundImage: isLogin
-                    ? AssetImage("images/icon_header.jpg")
-                    : AssetImage("images/icon_userreview_defaultavatar.png"),
+            leading: GestureDetector(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                child: CircleAvatar(
+                  backgroundImage: isLogin
+                      ? AssetImage("images/icon_header.jpg")
+                      : AssetImage("images/icon_userreview_defaultavatar.png"),
+                ),
               ),
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
             title: Padding(
               padding: EdgeInsets.all(6),

@@ -1,13 +1,22 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gank/categories/page_categories.dart';
+import 'package:flutter_gank/home/page_about.dart';
+import 'package:flutter_gank/home/page_collection.dart';
 import 'package:flutter_gank/mine/page_mine.dart';
 import 'package:flutter_gank/welfare/page_welfare.dart';
 import 'package:flutter_gank/home/page_home.dart';
 import 'package:flutter_gank/nearby/page_near_by.dart';
 import 'package:flutter_gank/news/page_news_home.dart';
+import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sql.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
+import 'database_helper.dart';
 
 class MainStateWidget extends StatefulWidget {
   @override
@@ -26,6 +35,8 @@ class MainState extends State<MainStateWidget>
 
   List<Widget> pages = new List();
 
+  bool isLogin = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -38,18 +49,153 @@ class MainState extends State<MainStateWidget>
       ..add(new NewsMainWidget())
       ..add(new WelfareStateWidget())
       ..add(new MineWidget());
+    get();
+  }
+
+  Future<void> get() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var il = prefs.getBool("isLogin");
+      setState(() {
+        isLogin = il == null ? false : il;
+      });
+      return isLogin;
+    } catch (e) {
+      setState(() {
+        isLogin = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return buildBottomBar();
+    return buildBottomBar(context);
   }
 
-  DateTime _lastPressedAt; //上次点击时间
-  Widget buildBottomBar() {
+  Widget drawerHeaderBuilder() {
+    return DrawerHeader(
+      child: Container(
+        child: Flex(
+          direction: Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            GestureDetector(
+              child: Container(
+                width: 50,
+                height: 50,
+                child: CircleAvatar(
+                  backgroundImage: isLogin
+                      ? AssetImage("images/icon_header.jpg")
+                      : AssetImage("images/icon_userreview_defaultavatar.png"),
+                ),
+              ),
+              onTap: toLogin,
+            ),
+            GestureDetector(
+              child: Container(
+                  height: 60,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    isLogin ? "stayWithMe" : "未登录",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  )),
+              onTap: toLogin,
+            )
+          ],
+        ),
+        padding: EdgeInsets.only(left: 25),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+      ),
+      padding: EdgeInsets.only(),
+    );
+  }
+
+  void toLogin() {
+    print("login");
+  }
+
+  void itemClick(BuildContext context, String name) {
+    Navigator.of(context).pop();
+    switch (name) {
+      case "收藏":
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext c) {
+          return new CollectionWidget();
+        }));
+
+        break;
+      case "设置":
+        break;
+      case "分享":
+        break;
+      case "关于":
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext c) {
+          return AboutWidget();
+        }));
+        break;
+      case "退出登录":
+        SharedPreferences.getInstance().then((sp) {
+          sp.setBool("isLogin", false);
+        });
+        break;
+    }
+  }
+
+  Widget buildBottomBar(BuildContext context) {
     return new WillPopScope(
         child: new Scaffold(
+          drawer: Drawer(
+            child: new ListView(
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                drawerHeaderBuilder(),
+                new ListTile(
+                  leading: Icon(
+                    Icons.collections,
+                    color: Colors.blue,
+                  ),
+                  title: new Text("收藏"),
+                  onTap: () => itemClick(context, "收藏"),
+                ),
+                new ListTile(
+                  leading: Icon(
+                    Icons.settings,
+                    color: Colors.lightGreen,
+                  ),
+                  title: new Text('设置'),
+                  onTap: () => itemClick(context, "设置"),
+                ),
+                new ListTile(
+                  leading: Icon(
+                    Icons.share,
+                    color: Colors.redAccent,
+                  ),
+                  title: new Text('分享'),
+                  onTap: () => itemClick(context, "分享"),
+                ),
+                new ListTile(
+                    leading: Icon(
+                      Icons.settings_backup_restore,
+                      color: Colors.greenAccent,
+                    ),
+                    title: new Text('关于'),
+                    onTap: () => itemClick(context, "关于")),
+                isLogin
+                    ? new ListTile(
+                        leading: Icon(
+                          Icons.exit_to_app,
+                          color: Colors.lightGreen,
+                        ),
+                        title: new Text('退出登录'),
+                        onTap: () => itemClick(context, "退出登录"))
+                    : Container(),
+              ],
+            ),
+          ),
           body: IndexedStack(
             children: <Widget>[
               HomeStateWidget(),

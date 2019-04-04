@@ -9,7 +9,6 @@ class NearbyDetailRecommendEntity extends Object {
 
   @JsonKey(name: 'serverInfo')
   ServerInfo serverInfo;
-
   @JsonKey(name: 'stid')
   String stid;
 

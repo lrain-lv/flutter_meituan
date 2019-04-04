@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gank/entity/news_data_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gank/news/page_news_detail.dart';
+import 'package:flutter_gank/database_helper.dart';
 
 // ignore: must_be_immutable
 class NewsItemWidget extends StatefulWidget {

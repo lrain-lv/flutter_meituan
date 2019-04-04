@@ -3,12 +3,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gank/entity/event/login_event.dart';
+import 'package:flutter_gank/home/page_login.dart';
 import 'package:flutter_gank/mine/page_mine_item.dart';
 import 'package:flutter_gank/EventBus.dart';
 
-
 class MineWidget extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -17,6 +16,21 @@ class MineWidget extends StatefulWidget {
 }
 
 class MineStateWidget extends State<MineWidget> {
+  bool isLogin = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bus.on<LoginEvent>().listen((event) {
+      if (event.isLogin) {
+        setState(() {
+          isLogin = true;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double barHeight = MediaQuery.of(context).padding.top;
@@ -63,30 +77,19 @@ class MineStateWidget extends State<MineWidget> {
                           height: 60,
                           alignment: Alignment.center,
                           child: GestureDetector(
-                            child: Image.asset(
-                              "images/icon_userreview_defaultavatar.png",
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(
+                                isLogin
+                                    ? "images/icon_header.jpg"
+                                    : "images/icon_userreview_defaultavatar.png",
+                              ),
                             ),
                             onTap: () {
-                              return showDialog(
-                                  context: context,
-                                  builder: (context) => new AlertDialog(
-                                        content: new Text("确认登录么？"),
-                                        actions: <Widget>[
-                                          new FlatButton(
-                                              onPressed: () =>
-                                                  Navigator.of(context)
-                                                      .pop(false),
-                                              child: new Text("取消")),
-                                          new FlatButton(
-                                              onPressed: () {
-                                                bus
-                                                    .fire(LoginEvent(true));
-                                                Navigator.of(context)
-                                                    .pop(false);
-                                              },
-                                              child: new Text("确定"))
-                                        ],
-                                      ));
+                              if (!isLogin)
+                                Navigator.push(context, new MaterialPageRoute(
+                                    builder: (BuildContext c) {
+                                  return LoginWidget();
+                                }));
                             },
                           )),
                       top: 44 + barHeight,
